@@ -4,7 +4,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    String driverPath = "C:\\Users\\kusampudih\\Downloads\\chromedriver_win32\\chromedriver.exe";
+    String driverPath = "C:\\Users\\kavya\\Downloads\\chromedriver_win32\\chromedriver.exe";
     public WebDriver driver;
 
     BaseTest() {

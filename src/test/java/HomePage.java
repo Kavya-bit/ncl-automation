@@ -10,30 +10,29 @@ import org.openqa.selenium.support.PageFactory;
 public class HomePage {
     private final WebDriver driver;
 
-    @FindBy(xpath = "/html/body/main/section[1]/div/div/form/div[2]/div/div[1]/div/div/div[1]/div/div[1]/div/div[1]/div")
+    @FindBy(xpath = "//div[@data-code='destination']")
 
     WebElement destinationCruise;
-    @FindBy(xpath = "//input[@placeholder='Find a Destination']")
-
+    @FindBy(xpath ="//span[contains(text(),'Alaska Cruises')]" )
     WebElement selectCruiseFromDropDown;
 
-    @FindBy(xpath = "/html/body/main/section[1]/div/div/form/div[2]/div/div[1]/div/div/div[1]/div/div[1]/div/div[2]/div/div/div[3]/div/div/div[2]/ul/li[2]/a")
+    @FindBy(xpath = "//div[@data-code='destination'] //a[@title='Apply']")
     WebElement apply;
 
-    @FindBy(xpath = "/html/body/main/section[1]/div/div/form/div[2]/div/div[1]/div/div/div[2]/div/div/div/div[1]/div")
+    @FindBy(xpath = "//div[@data-code='dates']")
 
     WebElement dates;
 
-    @FindBy(xpath = "//*[@id=\"month-view-32006\"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/ul/li[2]/div/div[2]/ul/li[4]/div/label")
+    @FindBy(xpath = "//li[@data-value='April'][@data-year='2021']")
 
     WebElement month;
 
-    @FindBy(xpath = "/html/body/main/section[1]/div/div/form/div[2]/div/div[1]/div/div/div[2]/div/div/div/div[2]/div/div/div[3]/div/div/div[2]/ul/li[2]/a")
+    @FindBy(xpath = "//div[@data-code='dates'] //a[@title='Apply']")
 
     WebElement dateApply;
 
 
-    @FindBy(xpath = "/html/body/main/section[1]/div/div/form/div[2]/div/div[3]/a")
+    @FindBy(xpath = "//a[@data-action='find-a-cruise']")
 
     WebElement findCruise;
 
@@ -41,7 +40,7 @@ public class HomePage {
 
     WebElement closeModal;
 
-    @FindBy(xpath = "/html/body/main/ul/li[2]/section/div/div/div[3]/ul/li[1]/article/div[1]/div[3]/div/div[1]/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/span")
+    @FindBy(xpath = " //ul[@class='listing -block'] //li[@app-offers-card-component][1]//span[@class='headline-1 -variant-3']")
 
     WebElement offerPrice;
 
@@ -58,7 +57,9 @@ public class HomePage {
 
     public void findCruisesAndClosePopUp() throws InterruptedException {
         destinationCruise.click();
+        Thread.sleep(200);
         selectCruiseFromDropDown.click();
+        Thread.sleep(500);
         apply.click();
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("scroll(250, 0)");
@@ -67,6 +68,7 @@ public class HomePage {
         Thread.sleep(500);
         dateApply.click();
         findCruise.click();
+        Thread.sleep(10000);
         closeModal.click();
 
 

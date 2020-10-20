@@ -21,21 +21,16 @@ public class NclAutomationTest extends BaseTest {
             System.out.println(offerPriceText);
             VacationsPage vacationsPage = new VacationsPage(this.driver);
             vacationsPage.viewCruises();
+            vacationsPage.clickOnDates();
             String offeredTextPrice = driver.findElements(By.xpath("//*[@id=\"anchor-datePrice\"]/div/div/div/div/div[2]/ul/li/div/div[1]/div/div[2]/div/div[2]/ul/li/div/div[2]/div/ul")).get(0).getText();
 
+            System.out.println("pricess"+offeredTextPrice);
             Assert.assertTrue(offeredTextPrice.contains(offerPriceText));
 
 
         } catch (InterruptedException e) {
             System.out.println("exception occurred");
         }
-
-// get the current URL of the page
-        String URL = driver.getCurrentUrl();
-        System.out.print(URL);
-//get the title of the page
-        String title = driver.getTitle();
-        System.out.println(title);
     }
 
     @BeforeTest

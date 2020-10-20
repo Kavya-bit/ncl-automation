@@ -8,7 +8,14 @@ public class VacationsPage {
     private final WebDriver driver;
     @FindBy(xpath = "/html/body/main/ul/li[2]/section/div/div/div[3]/ul/li[1]/article/div[1]/div[3]/div/div[4]/div/div[1]/a")
 
+
+
+    //a[@href='#anchor-datePrice' and @class='c133_link nav-link link-2' ]
+
     WebElement viewCruise;
+
+    @FindBy(xpath = " //a[@href='#anchor-datePrice' and @class='c133_link nav-link link-2' ]")
+    WebElement datesAndPrice;
 
     public VacationsPage(WebDriver driver) {
         this.driver = driver;
@@ -20,5 +27,8 @@ public class VacationsPage {
 
     public void viewCruises() {
         viewCruise.click();
+    }
+    void clickOnDates(){
+        datesAndPrice.click();
     }
 }
