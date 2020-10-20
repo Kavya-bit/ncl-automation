@@ -10,22 +10,24 @@ public class NclAutomationTest extends BaseTest {
 
     @Test
     public void test() {
-// Create driver object for CHROME browser
-        driver.navigate().to("https://www.ncl.com/");
-        driver.manage().window().maximize();
 
         HomePage homePage = new HomePage(this.driver);
         try {
-            homePage.findCruisesAndClosePopUp();
+            homePage.findCruisesAndClosePopUp("Alaska Cruises", "April");
             String offerPriceText = homePage.offerPrice.getText();
+
+            //since no logging frame work is used using sysout for logging purpose
+
             System.out.println(offerPriceText);
             VacationsPage vacationsPage = new VacationsPage(this.driver);
             vacationsPage.viewCruises();
             vacationsPage.clickOnDates();
-            String offeredTextPrice = driver.findElements(By.xpath("//*[@id=\"anchor-datePrice\"]/div/div/div/div/div[2]/ul/li/div/div[1]/div/div[2]/div/div[2]/ul/li/div/div[2]/div/ul")).get(0).getText();
+            String listedOfferPrices = vacationsPage.getListedOfferPrices();
+            System.out.println("prices" + listedOfferPrices);
 
-            System.out.println("pricess"+offeredTextPrice);
-            Assert.assertTrue(offeredTextPrice.contains(offerPriceText));
+            /*Making assertion so that offerPrice should be available in one of the listed prices on vacations page */
+
+            Assert.assertTrue(listedOfferPrices.contains(offerPriceText));
 
 
         } catch (InterruptedException e) {
@@ -35,13 +37,15 @@ public class NclAutomationTest extends BaseTest {
 
     @BeforeTest
     public void beforeTest() {
-
-        System.out.println("before test");
+        driver.navigate().to("https://www.ncl.com/");
+        driver.manage().window().maximize();
+        System.out.println("Starting NCL AAutomation test");
     }
 
     @AfterTest
     public void afterTest() {
+        /*quitting chrome browser after tests are completed*/
         driver.quit();
-        System.out.println("after test");
+        System.out.println("Completed NCL AAutomation test");
     }
 }

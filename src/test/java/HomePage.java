@@ -2,8 +2,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -13,7 +11,7 @@ public class HomePage {
     @FindBy(xpath = "//div[@data-code='destination']")
 
     WebElement destinationCruise;
-    @FindBy(xpath ="//span[contains(text(),'Alaska Cruises')]" )
+
     WebElement selectCruiseFromDropDown;
 
     @FindBy(xpath = "//div[@data-code='destination'] //a[@title='Apply']")
@@ -22,8 +20,6 @@ public class HomePage {
     @FindBy(xpath = "//div[@data-code='dates']")
 
     WebElement dates;
-
-    @FindBy(xpath = "//li[@data-value='April'][@data-year='2021']")
 
     WebElement month;
 
@@ -54,29 +50,51 @@ public class HomePage {
 
     }
 
+    // created getters and setters to input dynamic values for cruise name and month
+    public WebElement getSelectCruiseFromDropDown() {
+        return selectCruiseFromDropDown;
+    }
 
-    public void findCruisesAndClosePopUp() throws InterruptedException {
+    public void setSelectCruiseFromDropDown(String selectCruiseFromDropDown) {
+
+
+        this.selectCruiseFromDropDown = driver.findElement(By.xpath("//span[contains(text(),'" + selectCruiseFromDropDown + "')]"));
+    }
+
+    public WebElement getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = driver.findElement(By.xpath("//li[@data-value='" + month + "'][@data-year='2021']"));
+    }
+
+
+    public void findCruisesAndClosePopUp(String cruiseName, String sailingMonth) throws InterruptedException {
         destinationCruise.click();
         Thread.sleep(200);
+        setSelectCruiseFromDropDown(cruiseName);
         selectCruiseFromDropDown.click();
         Thread.sleep(500);
         apply.click();
+        //we need to scroll to top of the page because element is not visible at that point after selecting cruise
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("scroll(250, 0)");
         dates.click();
+        setMonth(sailingMonth);
         month.click();
-        Thread.sleep(500);
+        /* we can use ExpectedConditions utility class to make sure all elements are visible and matched the criteria required before performing actions */
+//        ExpectedConditions.elementToBeSelected()
+        // added time because element is not visible sometimes
+        Thread.sleep(1000);
         dateApply.click();
         findCruise.click();
+        //page is taking long time to load pop up so added more wait time
         Thread.sleep(10000);
         closeModal.click();
 
 
-
     }
 
-    public void fillSearchCriteria() throws InterruptedException {
 
-
-    }
 }

@@ -1,3 +1,4 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,5 +31,11 @@ public class VacationsPage {
     }
     void clickOnDates(){
         datesAndPrice.click();
+    }
+
+    public String getListedOfferPrices() {
+
+      return  driver.findElements(By.xpath("//*[@id=\"anchor-datePrice\"]/div/div/div/div/div[2]/ul/li/div/div[1]/div/div[2]/div/div[2]/ul/li/div/div[2]/div/ul")).get(0).getText();
+
     }
 }
