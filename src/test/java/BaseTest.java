@@ -13,7 +13,7 @@ public class BaseTest {
         System.setProperty("webdriver.chrome.driver", driverPath);
         /*Create driver object for CHROME browser*/
         this.driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
 
     }
 }
